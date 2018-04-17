@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title></title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular.min.js"></script>
+	<script src="produto-controller.js"></script>
+</head>
+<body ng-app="myStore">
+
+<div ng-controller="ProdutoController as $ctrl">
+
+	<input type="text" 
+		name="nomeProduto" 
+		placeholder="Nome"
+		ng-model="$ctrl.novoProduto.nome">
+	<input type="text" 
+		name="nomeProduto" 
+		placeholder="Preço"
+		ng-model="$ctrl.novoProduto.preco">
+	<input type="text" 
+		name="nomeProduto" 
+		placeholder="Descrição"
+		ng-model="$ctrl.novoProduto.descricao">
+	<button ng-click="$ctrl.criarProduto()">Criar</button>
+	<hr>
+
+	<hr>
+	<div ng-repeat="produto in $ctrl.listaProdutos">
+		<p ng-bind="produto.nome"></p>
+		<p ng-bind="produto.preco"></p>
+		<p ng-bind="produto.descricao"></p>
+	</div>
+</div>
+
+</body>
+</html>
