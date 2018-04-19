@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+	<meta charset="utf-8">
 	<title></title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular.min.js"></script>
 	<script src="produto-controller.js"></script>
 </head>
 <body ng-app="myStore">
 
-<div ng-controller="ProdutoController as $ctrl">
+<div ng-controller="ClienteController as $ctrl">
+	<h3>Nossos Clientes</h3>
+
+	<div >
+		<table>
+			<thead>
+				<tr>
+					<td>ID</td>
+					<td>Nome</td>
+					<td>Cidade</td>
+				</tr>
+			</thead>
+				
+			<tbody ng-repeat="cliente in $ctrl.listaClientes track by $index">
+				<tr>
+					<td ng-bind="cliente.id"></td>
+					<td ng-bind="cliente.nome"></td>
+					<td ng-bind="cliente.cidade"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 	<input type="text" 
 		name="nomeProduto" 
@@ -25,11 +47,7 @@
 	<hr>
 
 	<hr>
-	<div ng-repeat="produto in $ctrl.listaProdutos">
-		<p ng-bind="produto.nome"></p>
-		<p ng-bind="produto.preco"></p>
-		<p ng-bind="produto.descricao"></p>
-	</div>
+
 </div>
 
 </body>
