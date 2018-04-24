@@ -13,7 +13,7 @@ function ProdutoController() {
 	this.estiloTabelaLinhaImpar = {'background-color':'blue'}
 	this.estiloTabelaLinhaPar = {'background-color':'red'}
 	var id = 0;
-	this.criarProduto = function() {
+	this.criar = function() {
 		this.novoProduto.id = ++id;
 		this.listaProdutos.push(this.novoProduto);
 		this.novoProduto = {};

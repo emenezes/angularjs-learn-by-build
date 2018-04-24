@@ -3,12 +3,13 @@
 <head>
 	<meta charset="utf-8">
 	<title></title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.10/angular.min.js"></script>
 	<script src="produto-controller.js"></script>
 </head>
 <body ng-app="myStore">
 
 <div ng-controller="ProdutoController as $ctrl">
+
 	<h3>Nossos Produtos</h3>
 	<div >
 		<table>
@@ -20,10 +21,10 @@
 				</tr>
 			</thead>
 				
-			<tbody ng-repeat="produto in $ctrl.listaProdutos track by $index">
-				<tr ng-style="$odd?
-				$ctrl.estiloTabelaLinhaImpar :
-				{'background-color':'yellow'}">
+			<tbody>
+				<tr 
+				ng-repeat="produto in $ctrl.listaProdutos track by $index"
+				ng-style="$odd?$ctrl.estiloTabelaLinhaImpar:$ctrl.estiloTabelaLinhaPar">
 					<td ng-bind="produto.id"></td>
 					<td ng-bind="produto.nome"></td>
 					<td ng-bind="produto.preco"></td>
@@ -31,12 +32,16 @@
 			</tbody>
 		</table>
 	</div>
-	<h4>Criar novo produto</h4>
-	<form>
+
+	<hr>
+
+	<h3>Criar novo produto</h4>
+	<form name="criarForm">
 		<input type="text" 
 			name="nomeProduto" 
 			placeholder="Nome"
-			ng-model="$ctrl.novoProduto.nome"><br>
+			ng-model="$ctrl.novoProduto.nome"
+			ng-required="true"><br>
 		<input type="text" 
 			name="nomeProduto" 
 			placeholder="Preço"
@@ -45,8 +50,9 @@
 			name="nomeProduto" 
 			placeholder="Descrição"
 			ng-model="$ctrl.novoProduto.descricao"><br>
-		<button ng-click="$ctrl.criarProduto()">Criar</button>
+		<button ng-click="$ctrl.criar()">Criar</button>
 	</form>
+
 </div>
 
 </body>

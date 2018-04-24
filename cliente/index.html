@@ -3,14 +3,14 @@
 <head>
 	<meta charset="utf-8">
 	<title></title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.3/angular.min.js"></script>
-	<script src="produto-controller.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.10/angular.min.js"></script>
+	<script src="cliente-controller.js"></script>
 </head>
 <body ng-app="myStore">
 
 <div ng-controller="ClienteController as $ctrl">
-	<h3>Nossos Clientes</h3>
 
+	<h3>Nossos Clientes</h3>
 	<div >
 		<table>
 			<thead>
@@ -21,8 +21,9 @@
 				</tr>
 			</thead>
 				
-			<tbody ng-repeat="cliente in $ctrl.listaClientes track by $index">
-				<tr>
+			<tbody>
+				<tr ng-repeat="cliente in $ctrl.listaClientes track by $index"
+				ng-style="$odd?$ctrl.estiloTabelaLinhaImpar:$ctrl.estiloTabelaLinhaPar">
 					<td ng-bind="cliente.id"></td>
 					<td ng-bind="cliente.nome"></td>
 					<td ng-bind="cliente.cidade"></td>
@@ -31,22 +32,23 @@
 		</table>
 	</div>
 
-	<input type="text" 
-		name="nomeProduto" 
-		placeholder="Nome"
-		ng-model="$ctrl.novoProduto.nome">
-	<input type="text" 
-		name="nomeProduto" 
-		placeholder="Preço"
-		ng-model="$ctrl.novoProduto.preco">
-	<input type="text" 
-		name="nomeProduto" 
-		placeholder="Descrição"
-		ng-model="$ctrl.novoProduto.descricao">
-	<button ng-click="$ctrl.criarProduto()">Criar</button>
 	<hr>
 
-	<hr>
+	<h3>Criar novos clientes</h3>
+	<form name="criarForm">
+		<input type="text" 
+			name="nome" 
+			placeholder="Nome"
+			ng-model="$ctrl.novoCliente.nome"><br>
+		<select
+			name="cidade" 
+			placeholder="-- Escolha sua cidade --"
+			ng-model="$ctrl.novoCliente.cidade">
+			<option ng-repeat="cidade in $ctrl.listaCidades" value="{{cidade}}">{{cidade}}</option>
+		</select>
+		<br>
+		<button ng-click="$ctrl.criar()">Criar</button>
+	</form>
 
 </div>
 
