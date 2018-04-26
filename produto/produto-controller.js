@@ -6,9 +6,10 @@ angular.module('myStore',[]);
 
 (function(){
 
-function ProdutoController() {
+function ProdutoController($filter) {
 	let listaProdutosStored = localStorage.getItem('listaProdutos');
-	this.listaProdutos = (listaProdutosStored && JSON.parse(listaProdutosStored)) || [];
+	this.listaProdutosOriginal = (listaProdutosStored && JSON.parse(listaProdutosStored)) || [];
+	this.listaProdutos = this.listaProdutosOriginal;
 	this.novoProduto = {};
 	this.estiloTabelaLinhaImpar = {'background-color':'blue'}
 	this.estiloTabelaLinhaPar = {'background-color':'red'}
@@ -19,9 +20,12 @@ function ProdutoController() {
 		this.novoProduto = {};
 		localStorage.setItem('listaProdutos',JSON.stringify(this.listaProdutos));
 	}
+	this.filtrarProdutos = () => {
+		this.listaProdutos = $filter('filter')(this.listaProdutosOriginal, this.produtoBuscado);
+	}
 }
 
-ProdutoController.$inject = [];
+ProdutoController.$inject = ['$filter'];
 angular.module('myStore')
 	.controller('ProdutoController', ProdutoController);
 

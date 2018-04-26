@@ -11,6 +11,12 @@
 <div ng-controller="ClienteController as $ctrl">
 
 	<h3>Nossos Clientes</h3>
+	<form name="buscarCliente">
+		<input type="text" 
+			name="clienteBuscado" 
+			placeholder="Nome"
+			ng-model="$ctrl.clienteBuscado">
+	</form>
 	<div >
 		<table>
 			<thead>
@@ -22,7 +28,7 @@
 			</thead>
 				
 			<tbody>
-				<tr ng-repeat="cliente in $ctrl.listaClientes track by $index"
+				<tr ng-repeat="cliente in $ctrl.listaClientes  | filter:$ctrl.clienteBuscado track by $index"
 				ng-style="$odd?$ctrl.estiloTabelaLinhaImpar:$ctrl.estiloTabelaLinhaPar">
 					<td ng-bind="cliente.id"></td>
 					<td ng-bind="cliente.nome"></td>

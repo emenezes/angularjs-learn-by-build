@@ -28,3 +28,17 @@ Código para criação de mockup data no [JSON Generator](https://next.json-gene
   }
 ]
 ```
+
+#### Criação de produtos
+```JSON
+[
+  {
+    'repeat(40)': {
+      id: '{{index(1)}}',
+      nome: '{{company()}}',
+      descricao: '{{lorem(100, "words")}}',
+      preco: '{{floating(10000, 500000, 2)}}'
+    }
+  }
+]
+```

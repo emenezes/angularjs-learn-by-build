@@ -11,6 +11,12 @@
 <div ng-controller="ProdutoController as $ctrl">
 
 	<h3>Nossos Produtos</h3>
+	<form name="buscarProduto" ng-submit="$ctrl.filtrarProdutos()">
+		<input type="text" 
+			name="produtoBuscado" 
+			placeholder="Nome"
+			ng-model="$ctrl.produtoBuscado">
+	</form>
 	<div >
 		<table>
 			<thead>
@@ -27,7 +33,7 @@
 				ng-style="$odd?$ctrl.estiloTabelaLinhaImpar:$ctrl.estiloTabelaLinhaPar">
 					<td ng-bind="produto.id"></td>
 					<td ng-bind="produto.nome"></td>
-					<td ng-bind="produto.preco"></td>
+					<td ng-bind="produto.preco | currency:'R$'"></td>
 				</tr>
 			</tbody>
 		</table>
