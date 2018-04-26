@@ -8,7 +8,7 @@ Extensão para Chrome
 Código para criação de mockup data no [JSON Generator](https://next.json-generator.com)
 
 #### Criação de usuários
-```JSON
+```Javascript
 [
   {
     'repeat(5, 10)': {
@@ -21,7 +21,7 @@ Código para criação de mockup data no [JSON Generator](https://next.json-gene
 ```
 
 #### Criação de cidades
-```JSON
+```Javascript
 [
   {
     'repeat(20)' :'{{city()}},{{state(true)}}'
@@ -30,7 +30,7 @@ Código para criação de mockup data no [JSON Generator](https://next.json-gene
 ```
 
 #### Criação de produtos
-```JSON
+```Javascript
 [
   {
     'repeat(40)': {
