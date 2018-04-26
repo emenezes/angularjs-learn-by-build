@@ -5,37 +5,37 @@
 	<title></title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.10/angular.min.js"></script>
 	<script src="../app.js"></script>
-	<script src="produto-controller.js"></script>
-	<script src="produto-service.js"></script>
+	<script src="pedido-controller.js"></script>
+	<script src="../produto/produto-service.js"></script>
 </head>
 <body ng-app="myStore">
 
-<div ng-controller="ProdutoController as $ctrl">
+<div ng-controller="PedidoController as $ctrl">
 
-	<h3>Nossos Produtos</h3>
-	<form name="buscarProduto" ng-submit="$ctrl.filtrarProdutos()">
+	<h3>Nossos Pedidos</h3>
+	<form name="buscarPedido" ng-submit="$ctrl.filtrarPedidos()">
 		<input type="text" 
-			name="produtoBuscado" 
+			name="pedidoBuscado" 
 			placeholder="Nome"
-			ng-model="$ctrl.produtoBuscado">
+			ng-model="$ctrl.pedidoBuscado">
 	</form>
 	<div >
 		<table>
 			<thead>
 				<tr>
 					<td>ID</td>
-					<td>Produto</td>
+					<td>Pedido</td>
 					<td>Preço</td>
 				</tr>
 			</thead>
 				
 			<tbody>
 				<tr 
-				ng-repeat="produto in $ctrl.listaProdutos track by $index"
+				ng-repeat="pedido in $ctrl.listaPedidos track by $index"
 				ng-style="$odd?$ctrl.estiloTabelaLinhaImpar:$ctrl.estiloTabelaLinhaPar">
-					<td ng-bind="produto.id"></td>
-					<td ng-bind="produto.nome"></td>
-					<td ng-bind="produto.preco | currency:'R$'"></td>
+					<td ng-bind="pedido.id"></td>
+					<td ng-bind="pedido.idCliente"></td>
+					<!-- <td ng-bind="$ctrl.calcularTotal(pedido.idProduto) | currency:'R$'"></td> -->
 				</tr>
 			</tbody>
 		</table>
@@ -43,21 +43,21 @@
 
 	<hr>
 
-	<h3>Criar novo produto</h4>
+	<h3>Criar novo pedido</h4>
 	<form name="criarForm">
 		<input type="text" 
-			name="nomeProduto" 
+			name="nomePedido" 
 			placeholder="Nome"
-			ng-model="$ctrl.novoProduto.nome"
+			ng-model="$ctrl.novoPedido.nome"
 			ng-required="true"><br>
 		<input type="text" 
-			name="nomeProduto" 
+			name="nomePedido" 
 			placeholder="Preço"
-			ng-model="$ctrl.novoProduto.preco"><br>
+			ng-model="$ctrl.novoPedido.preco"><br>
 		<input type="text" 
-			name="nomeProduto" 
+			name="nomePedido" 
 			placeholder="Descrição"
-			ng-model="$ctrl.novoProduto.descricao"><br>
+			ng-model="$ctrl.novoPedido.descricao"><br>
 		<button ng-click="$ctrl.criar()">Criar</button>
 	</form>
 
