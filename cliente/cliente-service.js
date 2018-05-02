@@ -1,6 +1,6 @@
 (function(){
 
-function ClienteService($filter) {
+function ClienteService() {
 	this.listaClientes = (localStorage.hasOwnProperty('listaClientes') 
 		&& JSON.parse(localStorage.getItem('listaClientes'))) || [];
 	

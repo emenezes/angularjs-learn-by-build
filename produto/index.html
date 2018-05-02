@@ -1,67 +1,75 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="utf-8">
-	<title></title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.10/angular.min.js"></script>
-	<script src="../app.js"></script>
-	<script src="produto-controller.js"></script>
-	<script src="produto-service.js"></script>
-</head>
-<body ng-app="myStore">
-
-<div ng-controller="ProdutoController as $ctrl">
-
-	<h3>Nossos Produtos</h3>
-	<form name="buscarProduto" ng-submit="$ctrl.filtrarProdutos()">
-		<input type="text" 
-			name="produtoBuscado" 
-			placeholder="Nome"
-			ng-model="$ctrl.produtoBuscado">
-	</form>
-	<div >
-		<table>
-			<thead>
-				<tr>
-					<td>ID</td>
-					<td>Produto</td>
-					<td>Preço</td>
-				</tr>
-			</thead>
-				
-			<tbody>
-				<tr 
-				ng-repeat="produto in $ctrl.listaProdutos track by $index"
-				ng-style="$odd?$ctrl.estiloTabelaLinhaImpar:$ctrl.estiloTabelaLinhaPar">
-					<td ng-bind="produto.id"></td>
-					<td ng-bind="produto.nome"></td>
-					<td ng-bind="produto.preco | currency:'R$'"></td>
-				</tr>
-			</tbody>
-		</table>
+<div class="container">
+	<div class="row">
+		<h3>Nossos Produtos</h3>
+		<form name="buscarProduto"
+					class="form-horizontal"
+					ng-submit="$ctrl.filtrarProdutos()">
+			<div class="form-group">
+				<div class="col-xs-9">
+				<input type="text" 
+							 name="produtoBuscado"
+							 class="form-control"
+							 placeholder="Buscar produto"
+							 ng-model="$ctrl.produtoBuscado">
+				</div>
+				<div class="col-xs-3">
+				<button class="btn btn-primary">
+					<svg class="img-responsive center-block" fill="#FFFFFF"  viewBox="0 0 36 36" width="15px" xmlns="http://www.w3.org/2000/svg">
+				    <path d="M0 0h24v24H0z" fill="none"/>
+				    <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+					</svg>
+				</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="row">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<td>ID</td>
+						<td>Produto</td>
+						<td>Preço</td>
+					</tr>
+				</thead>
+					
+				<tbody>
+					<tr 
+					ng-repeat="produto in $ctrl.listaProdutos track by $index">
+						<td ng-bind="produto.id"></td>
+						<td ng-bind="produto.nome"></td>
+						<td ng-bind="produto.preco | currency:'R$'"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 	<hr>
 
-	<h3>Criar novo produto</h4>
-	<form name="criarForm">
-		<input type="text" 
-			name="nomeProduto" 
-			placeholder="Nome"
-			ng-model="$ctrl.novoProduto.nome"
-			ng-required="true"><br>
-		<input type="text" 
-			name="nomeProduto" 
-			placeholder="Preço"
-			ng-model="$ctrl.novoProduto.preco"><br>
-		<input type="text" 
-			name="nomeProduto" 
-			placeholder="Descrição"
-			ng-model="$ctrl.novoProduto.descricao"><br>
-		<button ng-click="$ctrl.criar()">Criar</button>
-	</form>
-
+	<div class="row">
+		<h3>Criar novo produto</h3>
+		<form name="criarForm">
+		<div class="form-group">
+			<input type="text" 
+						 name="nomeProduto"
+						 class="form-control"
+						 placeholder="Nome"
+						 ng-model="$ctrl.novoProduto.nome"
+						 ng-required="true">
+			<input type="text" 
+						 name="nomeProduto"
+						 class="form-control"
+						 placeholder="Preço"
+						 ng-model="$ctrl.novoProduto.preco">
+			<input type="text" 
+						 name="nomeProduto"
+						 class="form-control"
+						 placeholder="Descrição"
+						 ng-model="$ctrl.novoProduto.descricao">
+			<button ng-click="$ctrl.criar()">Criar</button>
+		</div>
+		</form>
+	</div>
 </div>
-
-</body>
-</html>

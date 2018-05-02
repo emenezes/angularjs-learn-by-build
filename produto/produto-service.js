@@ -1,20 +1,45 @@
 (function(){
 
-function ProdutoService($filter) {
-	this.listaProdutos = (localStorage.hasOwnProperty('listaProdutos') 
-		&& JSON.parse(localStorage.getItem('listaProdutos'))) || [];
+function ProdutoService() {
+
+	var listaProdutos;
+	var listaProdutosIndexadaPelaId;
+	var id;
 	
-	var id = localStorage.hasOwnProperty('lastProdutoId') || 0;
+	this.get = function() {
+		return listaProdutos || carregarProdutos();
+	}
+
 	this.criar = function(novoProduto) {
 		novoProduto.id = ++id;
-		this.listaProdutos.push(novoProduto);
-		localStorage.setItem('listaProdutos',JSON.stringify(this.listaProdutos));
+		listaProdutos.push(novoProduto);
+		this.salvarProdutos();
+	}
+
+	function indexarProdutosPelaId () {
+		let listaIndexada = {};
+		for (var i = listaProdutos.length - 1; i >= 0; i--) {
+			let id = listaProdutos[i].id;
+			listaIndexada[id] = listaProdutos[i];
+		}
+		return listaIndexada;
+	}
+
+	function carregarProdutos () {
+		var id = localStorage.hasOwnProperty('lastProdutoId') || 0;
+		listaProdutos = (localStorage.hasOwnProperty('listaProdutos') 
+			&& JSON.parse(localStorage.getItem('listaProdutos'))) || [];
+		listaProdutosIndexadaPelaId = indexarProdutosPelaId();
+		return listaProdutos;
+	}
+
+	function salvarProdutos () {
+		localStorage.setItem('listaProdutos',JSON.stringify(listaProdutos));
 		localStorage.setItem('lastProdutoId', id);
 	}
 }
 
 ProdutoService.$inject = [];
-angular.module('myStore')
-	.service('ProdutoService', ProdutoService);
+angular.module('myStore').service('ProdutoService', ProdutoService);
 
 })();

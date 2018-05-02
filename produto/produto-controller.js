@@ -2,7 +2,7 @@
 
 function ProdutoController($filter,ProdutoService) {
 	
-	this.listaProdutos = ProdutoService.listaProdutos;
+	this.listaProdutos = ProdutoService.get() ;
 	this.novoProduto = {};
 	this.estiloTabelaLinhaImpar = {'background-color':'blue'}
 	this.estiloTabelaLinhaPar = {'background-color':'red'}
@@ -13,12 +13,11 @@ function ProdutoController($filter,ProdutoService) {
 	}
 	
 	this.filtrarProdutos = () => {
-		this.listaProdutos = $filter('filter')(ProdutoService.listaProdutos, this.produtoBuscado);
+		this.listaProdutos = $filter('filter')(ProdutoService.get(), this.produtoBuscado);
 	}
 }
 
 ProdutoController.$inject = ['$filter','ProdutoService'];
-angular.module('myStore')
-	.controller('ProdutoController', ProdutoController);
+angular.module('myStore').controller('ProdutoController', ProdutoController);
 
 })();
