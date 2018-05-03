@@ -1,27 +1,28 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="utf-8">
-	<title></title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.10/angular.min.js"></script>
-	<script src="../app.js"></script>
-	<script src="cidades-service.js"></script>
-	<script src="cliente-service.js"></script>
-	<script src="cliente-controller.js"></script>
-</head>
-<body ng-app="myStore">
-
-<div ng-controller="ClienteController as $ctrl">
-
+<div class="container">
+	<div class="row">
 	<h3>Nossos Clientes</h3>
-	<form name="buscarCliente">
-		<input type="text" 
-			name="clienteBuscado" 
-			placeholder="Nome"
-			ng-model="$ctrl.clienteBuscado">
+	<form name="buscarCliente"
+				class="form-horizontal">
+			<div class="form-group">
+				<div class="col-xs-7">
+					<input type="text" 
+									name="clienteBuscado" 
+							    class="form-control"
+									placeholder="Nome"
+									ng-model="$ctrl.clienteBuscado">
+			</div>
+				<div class="col-xs-5">
+					<!-- TODO pull-right? -->
+					<button class="btn btn-primary" style="width: 100%">
+						Novo Produto
+					</button>
+				</div>
+			</div>
 	</form>
-	<div >
-		<table>
+	</div>
+	<div class="row">
+		<div class="table-responsive">
+			<table class="table table-striped">
 			<thead>
 				<tr>
 					<td>ID</td>
@@ -40,26 +41,31 @@
 			</tbody>
 		</table>
 	</div>
+	</div>
 
 	<hr>
 
-	<h3>Criar novos clientes</h3>
-	<form name="criarForm">
-		<input type="text" 
-			name="nome" 
-			placeholder="Nome"
-			ng-model="$ctrl.novoCliente.nome"><br>
-		<select
-			name="cidade" 
-			placeholder="-- Escolha sua cidade --"
-			ng-model="$ctrl.novoCliente.cidade">
-			<option ng-repeat="cidade in $ctrl.listaCidades" value="{{cidade}}">{{cidade}}</option>
-		</select>
-		<br>
-		<button ng-click="$ctrl.criar()">Criar</button>
-	</form>
-
+	<div class="row">
+		<h3>Criar novos clientes</h3>
+		<form name="criarForm">
+		<div class="form-group">
+			<input type="text" 
+				name="nome"
+				class="form-control" 
+				placeholder="Nome"
+				ng-model="$ctrl.novoCliente.nome"><br>
+			<select
+				name="cidade" 							   
+				class="form-control"
+				placeholder="-- Escolha sua cidade --"
+				ng-model="$ctrl.novoCliente.cidade">
+				<option ng-repeat="cidade in $ctrl.listaCidades" value="{{cidade}}">{{cidade}}</option>
+			</select>
+			<br>
+			<button ng-click="$ctrl.criar()">
+				Criar
+			</button>
+			</div>
+		</form>
+	</div>
 </div>
-
-</body>
-</html>

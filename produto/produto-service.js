@@ -7,13 +7,14 @@ function ProdutoService() {
 	var id;
 	
 	this.get = function() {
+		// TODO retornar cópia da lista
 		return listaProdutos || carregarProdutos();
 	}
 
 	this.criar = function(novoProduto) {
 		novoProduto.id = ++id;
 		listaProdutos.push(novoProduto);
-		this.salvarProdutos();
+		salvarProdutos();
 	}
 
 	function indexarProdutosPelaId () {
