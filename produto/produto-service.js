@@ -27,7 +27,8 @@ function ProdutoService() {
 	}
 
 	function carregarProdutos () {
-		var id = localStorage.hasOwnProperty('lastProdutoId') || 0;
+		var id = (localStorage.hasOwnProperty('lastProdutoId')
+			&& JSON.parse(localStorage.getItem('lastProdutoId'))) || 0
 		listaProdutos = (localStorage.hasOwnProperty('listaProdutos') 
 			&& JSON.parse(localStorage.getItem('listaProdutos'))) || [];
 		listaProdutosIndexadaPelaId = indexarProdutosPelaId();

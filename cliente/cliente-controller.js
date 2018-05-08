@@ -12,7 +12,13 @@ function ClienteController(srvCidades,ClienteService) {
 }
 
 ClienteController.$inject = ['CidadesService','ClienteService'];
-angular.module('myStore')
-	.controller('ClienteController', ClienteController);
+
+angular.module('myStore').component('clienteComponent', {
+	bindings: {
+
+	},
+	controller: ClienteController,
+  templateUrl: './cliente/index.html'
+});
 
 })();

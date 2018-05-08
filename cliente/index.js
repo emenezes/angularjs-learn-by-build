@@ -5,9 +5,7 @@ angular.module('myStore')
       $stateProvider.state({
         name: 'clientes',
         url: '/cliente',
-        controller: 'ClienteController',
-        controllerAs: '$ctrl',
-        templateUrl: './cliente/index.html'
+        component: 'clienteComponent'
       });
     }]);
 

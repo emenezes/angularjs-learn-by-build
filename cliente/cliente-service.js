@@ -28,7 +28,8 @@ function ClienteService() {
 	}
 
 	function carregarClientes () {
-		var id = localStorage.hasOwnProperty('lastClienteId') || 0;
+		var id = (localStorage.hasOwnProperty('lastClienteId')
+			&& JSON.parse(localStorage.getItem('lastClienteId'))) || 0;
 		listaClientes = (localStorage.hasOwnProperty('listaClientes') 
 			&& JSON.parse(localStorage.getItem('listaClientes'))) || [];
 		listaClientesIndexadaPelaId = indexarClientesPelaId();

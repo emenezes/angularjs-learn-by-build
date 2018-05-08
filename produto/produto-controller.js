@@ -18,6 +18,13 @@ function ProdutoController($filter,ProdutoService) {
 }
 
 ProdutoController.$inject = ['$filter','ProdutoService'];
-angular.module('myStore').controller('ProdutoController', ProdutoController);
+
+angular.module('myStore').component('produtoComponent', {
+	bindings: {
+
+	},
+	controller: ProdutoController,
+	templateUrl: './produto/index.html'
+});
 
 })();
