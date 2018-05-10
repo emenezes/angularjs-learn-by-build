@@ -14,7 +14,9 @@
 				</div>
 				<div class="col-xs-5">
 					<!-- TODO pull-right? -->
-					<button class="btn btn-primary" style="width: 100%">
+					<button class="btn btn-primary" 
+									style="width: 100%"
+									ng-click="$ctrl.abrirModal()">
 						Novo Produto
 					</button>
 				</div>
@@ -42,35 +44,5 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
-
-	<hr>
-
-	<div class="row">
-		<h3>Criar novo produto</h3>
-		<form name="criarForm">
-		<div class="form-group">
-			<input type="text" 
-						 name="nomeProduto"
-						 class="form-control"
-						 placeholder="Nome"
-						 ng-model="$ctrl.novoProduto.nome"
-						 ng-required="true">
-			<input type="text" 
-						 name="nomeProduto"
-						 class="form-control"
-						 placeholder="Preço"
-						 ng-model="$ctrl.novoProduto.preco">
-			<input type="text" 
-						 name="nomeProduto"
-						 class="form-control"
-						 placeholder="Descrição"
-						 ng-model="$ctrl.novoProduto.descricao">
-			<button class="btn btn-primary" 
-							ng-click="$ctrl.criar()">
-				Criar
-			</button>
-		</div>
-		</form>
 	</div>
 </div>

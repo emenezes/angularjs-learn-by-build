@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Adicionar produto</h3>
+</div>
+<div class="modal-body" id="modal-body">
+	<form name="criarForm">
+	<div class="form-group">
+		<input type="text" 
+					 name="nomeProduto"
+					 class="form-control"
+					 placeholder="Nome"
+					 ng-model="$ctrl.novoProduto.nome"
+					 ng-required="true">
+		<input type="text" 
+					 name="nomeProduto"
+					 class="form-control"
+					 placeholder="Preço"
+					 ng-model="$ctrl.novoProduto.preco">
+		<input type="text" 
+					 name="nomeProduto"
+					 class="form-control"
+					 placeholder="Descrição"
+					 ng-model="$ctrl.novoProduto.descricao">
+	</div>
+	</form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+    <button class="btn btn-default" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+</div>
