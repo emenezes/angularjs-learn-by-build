@@ -6,15 +6,15 @@ function ProdutoService($q) {
 	var listaProdutosIndexadaPelaId;
 	var id;
 
-	this.get = function() {
+	this.get = () => {
 		var deferred = $q.defer();
-
+		
 		if (listaProdutos) {
-			deferred.resolve(angular.copy(this.listaProdutos));
+			deferred.resolve(angular.copy(listaProdutos));
 		} else {
 			carregarProdutos();
-			if (this.id && this.listaProdutos){
-				deferred.resolve(angular.copy(this.listaProdutos));
+			if (id && listaProdutos){
+				deferred.resolve(angular.copy(listaProdutos));
 			} else {
 				deferred.reject('Não foi possível carregar os produtos');
 			}
@@ -30,6 +30,11 @@ function ProdutoService($q) {
 		novoProduto.id = ++id;
 		listaProdutos.push(novoProduto);
 		salvarProdutos();
+	}
+
+	this.getProdutoPelaId = function (id) {
+		this.get();
+		return listaProdutosIndexadaPelaId[id];
 	}
 
 	function indexarProdutosPelaId () {

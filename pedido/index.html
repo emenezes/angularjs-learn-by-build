@@ -1,71 +1,48 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="utf-8">
-	<title></title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.10/angular.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.10/angular-animate.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.10/angular-touch.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
-	<script src="../app.js"></script>
-	<script src="pedido-controller.js"></script>
-	<script src="../produto/produto-service.js"></script>
-</head>
-<body ng-app="myStore">
-
-<div ng-controller="PedidoController as $ctrl">
-
-	<h3>Nossos Pedidos</h3>
-	<form name="buscarPedido" ng-submit="$ctrl.filtrarPedidos()">
-		<input type="text" 
-			name="pedidoBuscado" 
-			placeholder="Nome"
-			ng-model="$ctrl.pedidoBuscado">
-	</form>
-	<div >
-		<table>
-			<thead>
-				<tr>
-					<td>ID</td>
-					<td>Pedido</td>
-					<td>Preço</td>
-				</tr>
-			</thead>
-				
-			<tbody>
-				<tr 
-				ng-repeat="pedido in $ctrl.listaPedidos track by $index"
-				ng-style="$odd?$ctrl.estiloTabelaLinhaImpar:$ctrl.estiloTabelaLinhaPar">
-					<td ng-bind="pedido.id"></td>
-					<td ng-bind="pedido.idCliente"></td>
-					<!-- <td ng-bind="$ctrl.calcularTotal(pedido.idProduto) | currency:'R$'"></td> -->
-				</tr>
-			</tbody>
-		</table>
+<div class="container">
+	<div class="row">
+		<h3>Nossos Pedidos</h3>
+		<form name="buscarPedido"
+					class="form-horizontal"
+					ng-submit="$ctrl.filtrarPedidos()">
+			<div class="form-group">
+				<div class="col-xs-7">
+					<input type="text" 
+							   name="pedidoBuscado"
+							   class="form-control"
+							   placeholder="Buscar pedido"
+							   ng-model="$ctrl.pedidoBuscado">
+				</div>
+				<div class="col-xs-5">
+					<!-- TODO pull-right? -->
+					<button class="btn btn-primary" 
+									style="width: 100%"
+									ng-click="$ctrl.abrirModal()">
+						Novo Pedido
+					</button>
+				</div>
+			</div>
+		</form>
 	</div>
-
-	<hr>
-
-	<h3>Criar novo pedido</h4>
-	<form name="criarForm">
-		<input type="text" 
-			name="nomePedido" 
-			placeholder="Nome"
-			ng-model="$ctrl.novoPedido.nome"
-			ng-required="true"><br>
-		<input type="text" 
-			name="nomePedido" 
-			placeholder="Preço"
-			ng-model="$ctrl.novoPedido.preco"><br>
-		<input type="text" 
-			name="nomePedido" 
-			placeholder="Descrição"
-			ng-model="$ctrl.novoPedido.descricao"><br>
-		<button ng-click="$ctrl.criar()">Criar</button>
-	</form>
-
+	<div class="row">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<td>ID</td>
+						<td>Cliente</td>
+						<td>Produto</td>
+					</tr>
+				</thead>
+					
+				<tbody>
+					<tr 
+					ng-repeat="pedido in $ctrl.listaPedidos track by $index">
+						<td ng-bind="pedido.id"></td>
+						<td ng-bind="$ctrl.getNomeClientePelaId(pedido)"></td>
+						<td ng-click="$ctrl.mostrarItensPedido(pedido)"> {{pedido.idProduto.length}} itens </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
-
-</body>
-</html>

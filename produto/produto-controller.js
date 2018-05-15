@@ -2,7 +2,9 @@
 
 function ProdutoController($uibModal,$filter,$log,ProdutoService) {
 
-	this.listaProdutos = ProdutoService.get() ;
+	ProdutoService.get()
+	.then( (lista) => this.listaProdutos = lista )
+	.catch( (error) => $log.info("Não foi possível carregar os produtos.", error) );
 	this.novoProduto = {};
 	this.estiloTabelaLinhaImpar = {'background-color':'blue'}
 	this.estiloTabelaLinhaPar = {'background-color':'red'}

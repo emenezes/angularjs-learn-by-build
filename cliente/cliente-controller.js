@@ -1,7 +1,10 @@
 (function(){
 
 function ClienteController(srvCidades,ClienteService) {
-	this.listaClientes = ClienteService.get();
+	ClienteService.get()
+	.then( (lista) => this.listaClientes = lista )
+	.catch( (error) => $log.info("Não foi possível carregar os produtos.", error) );
+	
 	this.novoCliente = {};
 	this.listaCidades = srvCidades;
 

@@ -1,14 +1,29 @@
 (function(){
 
-function ClienteService() {
+function ClienteService($q, $log) {
 	
 	var listaClientes;
 	var listaClientesIndexadaPelaId;
 	var id;
 	
-	this.get = function() {
-		// TODO retornar cópia da lista
-		return listaClientes || carregarClientes();
+	this.get = () => {
+		var deferred = $q.defer();
+		
+		if (listaClientes) {
+			deferred.resolve(angular.copy(listaClientes));
+		} else {
+			carregarClientes();
+			if (id && listaClientes){
+				deferred.resolve(angular.copy(listaClientes));
+			} else {
+				deferred.reject('Não foi possível carregar os clientes');
+			}
+			// $http.get("...")
+			// .then(()=>deferred.resolve(angular.copy(this.listaClientes)))
+			// .catch(()=>deferred.reject('Não foi possível carregar os produtos'));
+		}
+
+		return deferred.promise;
 	}
 
 	this.criar = function(novoCliente) {
@@ -16,6 +31,11 @@ function ClienteService() {
 		this.listaClientes.push(novoCliente);
 		localStorage.setItem('listaClientes',JSON.stringify(this.listaClientes));
 		localStorage.setItem('lastClienteId', id);
+	}
+
+	this.getClientePelaId = function (id) {
+		this.get();
+		return listaClientesIndexadaPelaId[id];
 	}
 
 	function indexarClientesPelaId () {
@@ -42,7 +62,7 @@ function ClienteService() {
 	}
 }
 
-ClienteService.$inject = [];
+ClienteService.$inject = ['$q','$log'];
 angular.module('myStore')
 	.service('ClienteService', ClienteService);
 

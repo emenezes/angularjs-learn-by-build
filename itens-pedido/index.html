@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Pedido Nr {{$ctrl.pedidoId}}</h3>
+</div>
+<div class="modal-body" id="modal-body">
+	<h4>{{$ctrl.nomeCliente}}</h4>
+	
+	<div class="row">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<td>ID</td>
+						<td>Produto</td>
+						<td>Preço</td>
+					</tr>
+				</thead>
+					
+				<tbody>
+					<tr 
+					ng-repeat="produto in $ctrl.lista track by $index">
+						<td ng-bind="produto.id"></td>
+						<td ng-bind="produto.nome"></td>
+						<td ng-bind="produto.preco | currency:'R$'"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">
+    	OK
+    </button>
+</div>
