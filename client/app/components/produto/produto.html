@@ -1,0 +1,48 @@
+<div class="container">
+	<div class="row">
+		<h3>Nossos Produtos</h3>
+		<form name="buscarProduto"
+					class="form-horizontal"
+					ng-submit="$ctrl.filtrarProdutos()">
+			<div class="form-group col-xs-7">
+					<input type="text" 
+							   name="produtoBuscado"
+							   class="form-control"
+							   placeholder="Buscar produto"
+							   ng-model="$ctrl.produtoBuscado">
+				</div>
+		</form>
+		<div class="col-xs-5">
+			<!-- TODO pull-right? -->
+			<button class="btn btn-primary" 
+							style="width: 100%"
+							ng-click="$ctrl.abrirModal()">
+				Novo Produto
+			</button>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<td>ID</td>
+						<td>Produto</td>
+						<td>Preço</td>
+					</tr>
+				</thead>
+					
+				<tbody>
+					<tr 
+					ng-repeat="produto in $ctrl.listaProdutos track by $index">
+						<td ng-bind="produto.id"></td>
+						<td ng-bind="produto.nome"></td>
+						<td ng-bind="produto.preco | currency:'R$'"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<alert message = "$ctrl.alertMsg"></alert>

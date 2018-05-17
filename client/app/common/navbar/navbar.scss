@@ -1,0 +1,38 @@
+@import "../../app-css-globals.scss";
+
+navbar {
+  .navbar-default {
+		background-color: rgb(2,127,244);
+		border-color: rgb(2,127,244);
+	}
+	.navbar-brand>img {
+		display: initial;
+	}
+	.navbar-default .navbar-brand {
+		color: white;
+	}
+	.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+		color: white;
+		background-color: transparent;
+		font-weight: bold;
+		cursor: pointer;
+	}
+	.navbar-default .navbar-toggle .icon-bar {
+	    background-color: white;
+	}
+	.navbar-default .navbar-toggle:focus {
+	    background-color: none;
+	}
+	.navbar-default .navbar-nav>li>a {
+		color: white;
+	}
+	.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+		background-color: white;
+	}
+	.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+		color: white;
+		background-color: transparent;
+		font-weight: bold;
+		cursor: pointer;
+	}
+}
