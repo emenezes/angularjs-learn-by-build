@@ -12,8 +12,8 @@ function ClienteController($log, $timeout, srvCidades, ClienteService) {
 		this.novoCliente = {};
 	}
 
-	this.showAlert = function (message, type, timeout) {
-		this.alertMsg = { text: message, type: type, timeout: timeout };
+	this.showAlert = function (message, type, tempo) {
+		this.alertMsg = { text: message, type: type, tempo: tempo };
 	}
 
 	this.showAlert('Alerta mostrado com sucesso', 'success', 5000)

@@ -1,11 +1,5 @@
-angular.module('myStore').component('itensPedido', {
-  templateUrl: './itens-pedido/index.html',
-  bindings: {
-    resolve: '<',
-    close: '&',
-    dismiss: '&'
-  },
-  controller: function ($log) {
+
+function ItensPedidoController ($log) {
 
     this.$onInit = function () {
       this.lista = angular.copy(this.resolve.listaProdutos);
@@ -21,4 +15,7 @@ angular.module('myStore').component('itensPedido', {
       this.dismiss({$value: 'cancel'});
     };
   }
-});
+
+ItensPedidoController.$inject = ['$log'];
+
+export default ItensPedidoController;
