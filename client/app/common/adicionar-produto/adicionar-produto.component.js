@@ -5,7 +5,7 @@ import './adicionar-produto.scss';
 let adicionarProdutoComponent = {
   restrict: 'E',
   bindings: {
-    listaProdutos: '<',
+    resolve: '<',
     close: '&',
     dismiss: '&'
   },

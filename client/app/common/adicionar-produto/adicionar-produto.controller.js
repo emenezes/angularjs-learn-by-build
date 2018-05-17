@@ -3,7 +3,7 @@
 function AdicionarProdutoController () {
 
   this.$onInit = function () {
-    this.lista = angular.copy(this.listaProdutos);
+    this.lista = angular.copy(this.resolve.listaProdutos);
   };
 
   this.ok = function () {
