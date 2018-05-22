@@ -41,6 +41,10 @@
     <button type="submit" class="btn btn-default">Submit</button>
     </form> -->
     <ul class="nav navbar-nav navbar-right">
+      <li ng-click="$ctrl.closeNavbar() && $ctrl.acaoBotao1()"
+      ng-if="$ctrl.devoMostrarBotao1()">
+        <a class='btn btn-info'>Ação 1</a>
+      </li>
     <li ui-sref-active="active" 
         ng-click="$ctrl.closeNavbar()">
       <a ui-sref="home">Login</a>
