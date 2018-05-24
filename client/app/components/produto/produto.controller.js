@@ -1,15 +1,20 @@
-function ProdutoController($uibModal,$filter,$log,ProdutoService) {
+function ProdutoController($uibModal,$filter,$log,ProdutoService,AlertService) {
 
 	ProdutoService.get()
 	.then( (lista) => { 
 		this.listaProdutosOriginal = lista; 
 		this.listaProdutos = lista;
 	})
-	.catch( (error) => $log.info("Não foi possível carregar os produtos.", error) );
+	.catch( (error) => $log.info(error) );
 	this.novoProduto = {};
 
 	this.criar = function(novoProduto) {
-		ProdutoService.criar (novoProduto);
+		ProdutoService.criar (novoProduto)
+		.then( (lista) => { 
+			this.listaProdutosOriginal = lista; 
+			this.listaProdutos = lista;
+			this.alertMsg = AlertService.showAlert('Produto criado com sucesso.', 'success', 5000)
+		});
 		this.novoProduto = {};
 	}
 	
@@ -34,6 +39,6 @@ function ProdutoController($uibModal,$filter,$log,ProdutoService) {
 	}
 }
 
-ProdutoController.$inject = ['$uibModal','$filter','$log','ProdutoService'];
+ProdutoController.$inject = ['$uibModal','$filter','$log','ProdutoService','AlertService'];
 
 export default ProdutoController;

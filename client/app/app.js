@@ -8,7 +8,7 @@ import uiRouter from 'angular-ui-router';
 import Common from './common/common';
 import Components from './components/components';
 import AppComponent from './app.component';
-import fakeData from './fake-data';
+// import fakeData from './fake-data';
 
 let appModule = angular.module('app', [
     ngAnimate,
@@ -41,5 +41,5 @@ let appModule = angular.module('app', [
 
   .name;
 
-angular.bootstrap(document.body, [appModule]);
-// export default appModule;
+// angular.bootstrap(document.body, [appModule]);
+export default appModule;

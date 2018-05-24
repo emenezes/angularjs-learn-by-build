@@ -1,39 +1,60 @@
 
-function ProdutoService($q) {
+function ProdutoService($q, $http, $log) {
 
 	var listaProdutos;
 	var listaProdutosIndexadaPelaId;
-	var id;
+	// var id;
 
 	this.get = () => {
-		var deferred = $q.defer();
+		var compromisso = $q.defer();
 		
 		if (listaProdutos) {
-			deferred.resolve(angular.copy(listaProdutos));
+			compromisso.resolve(angular.copy(listaProdutos));
 		} else {
 			carregarProdutos();
-			if (id && listaProdutos){
-				deferred.resolve(angular.copy(listaProdutos));
+			if (/*id &&*/ listaProdutos){
+				compromisso.resolve(angular.copy(listaProdutos));
 			} else {
-				deferred.reject('Não foi possível carregar os produtos');
+				$http.get('/api/produtos', {timeout:500})
+				.then((resposta)=> {
+					$log.debug(resposta);
+					compromisso.resolve(angular.copy(resposta.data))
+				})
+				.catch((httpError)=> {
+					$log.debug(httpError);
+					compromisso.reject('Não foi possível carregar os produtos.');
+				});
 			}
-			// $http.get("...")
-			// .then(()=>deferred.resolve(angular.copy(this.listaProdutos)))
-			// .catch(()=>deferred.reject('Não foi possível carregar os produtos'));
 		}
-
-		return deferred.promise;
+		return compromisso.promise;
 	}
 
 	this.criar = function(novoProduto) {
-		novoProduto.id = ++id;
-		listaProdutos.push(novoProduto);
-		salvarProdutos();
+		var compromisso = $q.defer();
+
+		$http.post('/api/produtos', novoProduto, {timeout:500})
+		.then((resposta)=> {
+			$log.debug(resposta);
+			$log.info('Produto salvo com sucesso no servidor.');
+			setListaProdutos(resposta.data);
+			compromisso.resolve(angular.copy(listaProdutos))
+		})
+		.catch((httpError)=> {
+			$log.debug(httpError);
+			compromisso.reject('Não foi possível salvar o novo produto.');
+		});
+		return compromisso.promise;
 	}
 
 	this.getProdutoPelaId = function (id) {
 		this.get();
 		return listaProdutosIndexadaPelaId[id];
+	}
+
+	function setListaProdutos(lista) {
+		listaProdutos = lista;
+		localStorage.setItem('listaProdutos',JSON.stringify(listaProdutos));
+		listaProdutosIndexadaPelaId = indexarProdutosPelaId();
 	}
 
 	function indexarProdutosPelaId () {
@@ -46,21 +67,17 @@ function ProdutoService($q) {
 	}
 
 	function carregarProdutos () {
-		id = (localStorage.hasOwnProperty('lastProdutoId')
-			&& JSON.parse(localStorage.getItem('lastProdutoId'))) || 0;
-		listaProdutos = (localStorage.hasOwnProperty('listaProdutos') 
-			&& JSON.parse(localStorage.getItem('listaProdutos'))) || [];
-		listaProdutosIndexadaPelaId = indexarProdutosPelaId();
+		// id = (localStorage.hasOwnProperty('lastProdutoId')
+		// 	&& JSON.parse(localStorage.getItem('lastProdutoId'))) || 0;
+		let lista = (localStorage.hasOwnProperty('listaProdutos') 
+			&& JSON.parse(localStorage.getItem('listaProdutos')));
+		if(lista)
+			setListaProdutos(lista);
 		return listaProdutos;
-	}
-
-	function salvarProdutos () {
-		localStorage.setItem('listaProdutos',JSON.stringify(listaProdutos));
-		localStorage.setItem('lastProdutoId', id);
 	}
 }
 
-ProdutoService.$inject = ['$q'];
+ProdutoService.$inject = ['$q','$http','$log'];
 
 export default ProdutoService;
 

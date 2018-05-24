@@ -1,5 +1,5 @@
 
-function ClienteController($log, $timeout, srvCidades, ClienteService) {
+function ClienteController($log, $timeout, srvCidades, ClienteService, AlertService) {
 	ClienteService.get()
 	.then( (lista) => this.listaClientes = lista )
 	.catch( (error) => $log.info("Não foi possível carregar os clientes.", error) );
@@ -12,13 +12,9 @@ function ClienteController($log, $timeout, srvCidades, ClienteService) {
 		this.novoCliente = {};
 	}
 
-	this.showAlert = function (message, type, tempo) {
-		this.alertMsg = { text: message, type: type, tempo: tempo };
-	}
-
-	this.showAlert('Alerta mostrado com sucesso', 'success', 5000)
+	this.alertMsg = AlertService.showAlert('Alerta mostrado com sucesso', 'success', 5000)
 }
 
-ClienteController.$inject = ['$log','$timeout','CidadesService','ClienteService'];
+ClienteController.$inject = ['$log','$timeout','CidadesService','ClienteService','AlertService'];
 
 export default ClienteController;
