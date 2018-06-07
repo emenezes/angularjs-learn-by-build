@@ -1,6 +1,8 @@
 class HomeController {
-  constructor($log, NavbarService) {
+  http = null;
+  constructor($log, NavbarService, $http) {
     this.name = 'home';
+    this.http = $http;
     this._log = $log;
     this._navbarService = NavbarService;
     NavbarService.mostrarBotaoAcao1 = true;
@@ -16,6 +18,12 @@ class HomeController {
   $onDestroy () {
   	this._navbarService.resetar();
   }
+
+  teste() {
+    // this.http.get('/api/produtos/555');
+    this.http.delete('/api/produtos/556')
+    .then((response)=>this._log.debug(response));
+  }
 }
-HomeController.$inject = ['$log','NavbarService'];
+HomeController.$inject = ['$log','NavbarService','$http'];
 export default HomeController;
